@@ -23,10 +23,12 @@
     woff
         .init({ woffId: "aqbfr51mLmVaMKkHxhqkAg" })  // ここでwoffIdを更新しました
         .then(() => {
+            console.log('WOFF SDK initialized successfully');
             return woff.getProfile(); 
         })
         .then(profile => {
             if (!profile) {
+                console.log('Profile received:', profile);
                 throw new Error('Profile is undefined');
             }
             const profileDiv = document.getElementById('profile');
