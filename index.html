@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>ユーザープロフィール</title>
+    <style>
+        /* 必要なモバイル最適化スタイルをここに追加 */
+        body {
+            font-family: "Arial", sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<div id="profile">
+    <!-- プロフィール情報がここに表示されます -->
+</div>
+
+<script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
+<script>
+    // Promise オブジェクトを使用した初期化
+    woff
+        .init({ woffId: "123456-abcedfg" })
+        .then(() => {
+            return woff.getProfile(); // WOFF API を実行してプロフィール情報を取得
+        })
+        .then(profile => {
+            // プロフィール情報をHTML要素に表示
+            const profileDiv = document.getElementById('profile');
+            profileDiv.innerHTML = `
+                <p>Name: ${profile.name}</p>
+                <p>Email: ${profile.email}</p>
+                <!-- 他のプロフィール情報も同様に追加できます -->
+            `;
+        })
+        .catch(err => {
+            console.log(err.code, err.message);
+        });
+</script>
+
+</body>
+</html>
