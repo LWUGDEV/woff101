@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>WOFF Sample</title>
+    <title>ユーザープロフィール</title>
     <style>
         /* 必要なモバイル最適化スタイルをここに追加 */
         body {
@@ -21,12 +21,14 @@
 <script>
     // Promise オブジェクトを使用した初期化
     woff
-        .init({ woffId: "aqbfr51mLmVaMKkHxhqkAg" })
+        .init({ woffId: "aqbfr51mLmVaMKkHxhqkAg" })  // ここでwoffIdを更新しました
         .then(() => {
-            return woff.getProfile(); // WOFF API を実行してプロフィール情報を取得
+            return woff.getProfile(); 
         })
         .then(profile => {
-            // プロフィール情報をHTML要素に表示
+            if (!profile) {
+                throw new Error('Profile is undefined');
+            }
             const profileDiv = document.getElementById('profile');
             profileDiv.innerHTML = `
                 <p>Name: ${profile.name}</p>
@@ -35,7 +37,7 @@
             `;
         })
         .catch(err => {
-            console.log(err.code, err.message);
+            console.error('An error occurred:', err.message);
         });
 </script>
 
