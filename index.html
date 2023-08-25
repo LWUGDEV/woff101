@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WOFF Sample</title>
+    <style>
+    button {
+        padding: 20px 30px;       /* ボタンの内側の余白を追加 */
+        font-size: 18px;         /* フォントサイズを大きくする */
+        border-radius: 8px;      /* ボタンの角を丸くする */
+        cursor: pointer;         /* ポインタをハンド型にする */
+        background-color: #007BFF;   /* ボタンの背景色 */
+        color: white;            /* ボタンの文字色 */
+        border: none;            /* ボタンのボーダーを無くす */
+        margin-top: 10px;        /* ボタンの上側の余白を追加 */
+        margin-bottom: 10px;     /* ボタンの下側の余白を追加 */
+        transition: background-color 0.3s;  /* ホバー時の背景色の遷移を滑らかにする */
+    }
+
+    button:hover {
+        background-color: #0056b3;   /* ボタンにホバーしたときの背景色 */
+    }
+
+    button:active {
+        background-color: #004085;   /* ボタンをクリックしたときの背景色 */
+    }
+</style>
+
 
     <!-- WOFF SDKの追加 -->
     <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
