@@ -1,110 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WOFF Simple app</title>
-    <style>
-        body {
-            font-size: 11px;
-            max-width: 100%;
-            text-align: left;
-        }
+    <title>WOFF Sample</title>
 
-        table {
-            table-layout: fixed;
-            word-break: break-all;
-        }
+    <!-- WOFF SDKの追加 -->
+    <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
 
-        th {
-            text-align: center;
-        }
+    <script>
+        var woffid = "aqbfr51mLmVaMKkHxhqkAg"; // 変数woffidの指定
 
-        table, th, td {
-            border: 1px solid black;
-        }
+        window.onload = function() {
+            // コールバックの定義
+            function successCallback() {
+                console.log("Initialization successful.");
+                
+                // woff.getProfileの実行
+                woff.getProfile().then((profile) => {
+                    document.getElementById("domainId").innerText = profile.domainId;
+                    document.getElementById("userId").innerText = profile.userId;
+                    document.getElementById("displayName").innerText = profile.displayName;
+                }).catch((err) => {
+                    console.log("Error fetching profile:", err);
+                });
+            }
 
-        button {
-            margin: 4px;
-        }
+            function errorCallback(err) {
+                console.log("Initialization failed:", err);
+            }
 
-        .hidden {
-            display: none;
+            // woff.initの実行
+            woff.init(
+                { woffId: woffid }, 
+                successCallback, 
+                errorCallback
+            );
         }
-    </style>
+    </script>
 </head>
 <body>
-    <h2>Profile</h2>
-    <table>
-        <tr>
-            <th>domainId</th>
-            <td id="domainIdField"></td>
-        </tr>
-        <tr>
-            <th>userId</th>
-            <td id="userIdProfileField"></td>
-        </tr>
-        <tr>
-            <th>displayName</th>
-            <td id="displayNameField"></td>
-        </tr>
-    </table>
-    <h2>SendMessage</h2>
-    <div class="buttonRow">
-        <label for="message">Message text</label>
-        <input type="text" value="text" name="message" id="sendMessageText">
-        <button id="sendMessageButton">Send Message</button>
+    <header>
+        WOFF Sample
+    </header>
+
+    <!-- プロフィール情報を表示する領域 -->
+    <div>
+        <h3>Profile Information:</h3>
+        <p>Domain ID: <span id="domainId"></span></p>
+        <p>User ID: <span id="userId"></span></p>
+        <p>Display Name: <span id="displayName"></span></p>
     </div>
 
-    <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
-    <script>
-        // !!! Please set your WOFF ID !!!
-        const woffId = 'aqbfr51mLmVaMKkHxhqkAg';
-
-        /**
-         * Get profile
-         */
-        const getProfile = () => {
-            woff.getProfile().then((profile) => {
-                console.log(profile);
-                document.getElementById('domainIdField').textContent = profile.domainId;
-                document.getElementById('userIdProfileField').textContent = profile.userId;
-                document.getElementById('displayNameField').textContent = profile.displayName;
-            }).catch((err) => {
-                console.log(err);
-                window.alert(err);
-            });
-        }
-
-        /**
-         * Register event handlers for the buttons displayed in the app
-         */
-        const registerButtonHandlers = () => {
-            document.getElementById('sendMessageButton').addEventListener('click', function() {
-                let msg = document.getElementById('sendMessageText').value;
-                woff.sendMessage({ 'content': msg }).then(() => {
-                    console.log("message sent: " + msg);
-                    window.alert('Message sent');
-                }).catch((err) => {
-                    console.log(err);
-                    window.alert(err);
-                });
-            });
-        }
-
-        // On load
-        window.addEventListener('load', () => {
-            console.log(woffId);
-            woff.init({ woffId: woffId })
-                .then(() => {
-                    registerButtonHandlers();
-                    getProfile();
-                })
-                .catch((err) => {
-                    window.alert(err);
-                    console.error(err);
-                });
-        });
-    </script>
+    <!-- ... (その他のコンテンツ) ... -->
 </body>
 </html>
