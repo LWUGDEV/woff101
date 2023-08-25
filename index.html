@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WOFF Sample</title>
     <style>
-    button {
+
+div.content-section {
+            background-color: #f5f5f5;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }    
+        button {
         padding: 20px 30px;       /* ボタンの内側の余白を追加 */
         font-size: 18px;         /* フォントサイズを大きくする */
         border-radius: 8px;      /* ボタンの角を丸くする */
@@ -102,7 +109,7 @@
     </header>
 
     <!-- プロフィール情報を表示する領域 -->
-    <div>
+    <div class="content-section">
         <h3>プロフィール情報:</h3>
         <p>ドメイン ID: <span id="domainId"></span></p>
         <p>ユーザー ID: <span id="userId"></span></p>
@@ -110,14 +117,14 @@
     </div>
 
     <!-- QRコードスキャンボタンと結果の表示領域 -->
-    <div>
+    <div class="content-section">
         <button onclick="scanQRCode()">QR コードスキャナーを起動</button>
         <h3>スキャン結果:</h3>
         <p id="scanResult"></p>
     </div>
 
     <!-- 位置情報を取得するボタンと結果の表示領域 -->
-    <div>
+    <div class="content-section">
         <button onclick="getLocation()">位置情報を取得</button>
         <button onclick="sendLocation()">位置情報を送信</button>
         <h3>位置情報結果:</h3>
