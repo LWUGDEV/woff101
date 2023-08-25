@@ -11,11 +11,18 @@
     <script>
         var woffid = "aqbfr51mLmVaMKkHxhqkAg"; // 変数woffidの指定
 
+        function scanQRCode() {
+            woff.scanQR().then((result) => {
+                document.getElementById("scanResult").innerText = result.value;
+            }).catch((err) => {
+                console.log("Error scanning QR:", err);
+            });
+        }
+
         window.onload = function() {
-            // コールバックの定義
             function successCallback() {
                 console.log("Initialization successful.");
-                
+
                 // woff.getProfileの実行
                 woff.getProfile().then((profile) => {
                     document.getElementById("domainId").innerText = profile.domainId;
@@ -50,6 +57,13 @@
         <p>Domain ID: <span id="domainId"></span></p>
         <p>User ID: <span id="userId"></span></p>
         <p>Display Name: <span id="displayName"></span></p>
+    </div>
+
+    <!-- QRコードスキャンボタンと結果の表示領域 -->
+    <div>
+        <button onclick="scanQRCode()">Start QR Code Scanner</button>
+        <h3>Scan Result:</h3>
+        <p id="scanResult"></p>
     </div>
 
     <!-- ... (その他のコンテンツ) ... -->
