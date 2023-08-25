@@ -32,6 +32,13 @@ div.content-section {
     button:active {
         background-color: #004085;   /* ボタンをクリックしたときの背景色 */
     }
+    /* スキャン結果と位置情報結果の背景を白にするスタイル */
+.result {
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #f0f0f0;
+}
 </style>
 
 
@@ -133,19 +140,18 @@ div.content-section {
 <div class="content-section">
     <button onclick="scanQRCode()">QR コードスキャナーを起動</button>
     <h3>スキャン結果:</h3>
-    <p id="scanResult"></p>
-    <button onclick="sendQRScanResult()">QR スキャン結果を送信</button> <!-- このボタンを追加しました -->
+    <p id="scanResult" class="result"></p> <!-- class を追加 -->
+    <button onclick="sendQRScanResult()">QR スキャン結果を送信</button>
 </div>
 
-
-    <!-- 位置情報を取得するボタンと結果の表示領域 -->
-    <div class="content-section">
-        <button onclick="getLocation()">位置情報を取得</button>
-        <h3>位置情報結果:</h3>
-        <p>緯度: <span id="latitude"></span></p>
-        <p>経度: <span id="longitude"></span></p>
-        <button onclick="sendLocation()">位置情報を送信</button> <!-- このボタンを位置情報結果の下に移動しました -->
-    </div>
+<!-- 位置情報を取得するボタンと結果の表示領域 -->
+<div class="content-section">
+    <button onclick="getLocation()">位置情報を取得</button>
+    <h3>位置情報結果:</h3>
+    <p>緯度: <span id="latitude" class="result"></span></p> <!-- class を追加 -->
+    <p>経度: <span id="longitude" class="result"></span></p> <!-- class を追加 -->
+    <button onclick="sendLocation()">位置情報を送信</button>
+</div>
 
     <!-- ... (その他のコンテンツ) ... -->
 </body>
