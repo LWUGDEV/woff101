@@ -33,12 +33,13 @@
 
         function sendLocation() {
             if (currentLocation) {
+                const locationMessage = `Latitude: ${currentLocation.coords.latitude}, Longitude: ${currentLocation.coords.longitude}`;
                 woff.sendMessage({
-                    text: `Latitude: ${currentLocation.coords.latitude}, Longitude: ${currentLocation.coords.longitude}`
+                    content: locationMessage
                 }).then(() => {
-                    alert("Location sent successfully!");
+                    console.log('message sent');
                 }).catch((err) => {
-                    console.log("Error sending message:", err);
+                    console.log('error', err);
                 });
             } else {
                 alert("Please get the location first!");
