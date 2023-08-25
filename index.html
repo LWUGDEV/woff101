@@ -19,6 +19,15 @@
             });
         }
 
+        function getLocation() {
+            navigator.geolocation.getCurrentPosition((position) => {
+                document.getElementById("latitude").innerText = position.coords.latitude;
+                document.getElementById("longitude").innerText = position.coords.longitude;
+            }, (err) => {
+                console.log("Error getting location:", err);
+            });
+        }
+
         window.onload = function() {
             function successCallback() {
                 console.log("Initialization successful.");
@@ -64,6 +73,14 @@
         <button onclick="scanQRCode()">Start QR Code Scanner</button>
         <h3>Scan Result:</h3>
         <p id="scanResult"></p>
+    </div>
+
+    <!-- 位置情報を取得するボタンと結果の表示領域 -->
+    <div>
+        <button onclick="getLocation()">Get Location</button>
+        <h3>Location Result:</h3>
+        <p>Latitude: <span id="latitude"></span></p>
+        <p>Longitude: <span id="longitude"></span></p>
     </div>
 
     <!-- ... (その他のコンテンツ) ... -->
