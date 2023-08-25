@@ -96,6 +96,13 @@ div.content-section {
             }
         }
 
+        function openWOFFGuide() {
+            woff.openWindow({
+                url: "https://developers.worksmobile.com/jp/docs/woff-guide",
+                external: true
+            });
+        }
+
         window.onload = function() {
             function successCallback() {
                 console.log("Initialization successful.");
@@ -154,7 +161,12 @@ div.content-section {
     <p>経度: <span id="longitude" class="result"></span></p> <!-- class を追加 -->
     <button onclick="sendLocation()">位置情報を送信</button>
 </div>
-
+    <!-- 参考情報の領域 -->
+    <div class="content-section">
+        <h3>参考情報</h3>
+        <p>WOFF SDKに関する詳しいガイドは以下のリンクから参照できます。</p>
+        <button onclick="openWOFFGuide()">WOFF ガイドを表示</button>
+    </div>
     <!-- ... (その他のコンテンツ) ... -->
 </body>
 </html>
