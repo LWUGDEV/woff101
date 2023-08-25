@@ -51,6 +51,19 @@ div.content-section {
             });
         }
 
+        function sendQRScanResult() {
+    var scanResult = document.getElementById('scanResult').innerText;
+    woff.sendMessage({
+        content: scanResult
+    })
+    .then(() => {
+        console.log('QR scan result sent');
+    })
+    .catch((err) => {
+        console.log('error', err);
+    });
+}
+
         function getLocation() {
             navigator.geolocation.getCurrentPosition((position) => {
                 currentLocation = position;
@@ -116,12 +129,14 @@ div.content-section {
         <p>表示名: <span id="displayName"></span></p>
     </div>
 
-    <!-- QRコードスキャンボタンと結果の表示領域 -->
-    <div class="content-section">
-        <button onclick="scanQRCode()">QR コードスキャナーを起動</button>
-        <h3>スキャン結果:</h3>
-        <p id="scanResult"></p>
-    </div>
+<!-- QRコードスキャンボタンと結果の表示領域 -->
+<div class="content-section">
+    <button onclick="scanQRCode()">QR コードスキャナーを起動</button>
+    <h3>スキャン結果:</h3>
+    <p id="scanResult"></p>
+    <button onclick="sendQRScanResult()">QR スキャン結果を送信</button> <!-- このボタンを追加しました -->
+</div>
+
 
     <!-- 位置情報を取得するボタンと結果の表示領域 -->
     <div class="content-section">
