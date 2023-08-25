@@ -11,6 +11,8 @@
     <script>
         var woffid = "aqbfr51mLmVaMKkHxhqkAg"; // 変数woffidの指定
 
+        var currentLocation = null; // 現在の位置情報を保存する変数
+
         function scanQRCode() {
             woff.scanQR().then((result) => {
                 document.getElementById("scanResult").innerText = result.value;
@@ -21,11 +23,26 @@
 
         function getLocation() {
             navigator.geolocation.getCurrentPosition((position) => {
+                currentLocation = position;
                 document.getElementById("latitude").innerText = position.coords.latitude;
                 document.getElementById("longitude").innerText = position.coords.longitude;
             }, (err) => {
                 console.log("Error getting location:", err);
             });
+        }
+
+        function sendLocation() {
+            if (currentLocation) {
+                woff.sendMessage({
+                    text: `Latitude: ${currentLocation.coords.latitude}, Longitude: ${currentLocation.coords.longitude}`
+                }).then(() => {
+                    alert("Location sent successfully!");
+                }).catch((err) => {
+                    console.log("Error sending message:", err);
+                });
+            } else {
+                alert("Please get the location first!");
+            }
         }
 
         window.onload = function() {
@@ -78,6 +95,7 @@
     <!-- 位置情報を取得するボタンと結果の表示領域 -->
     <div>
         <button onclick="getLocation()">Get Location</button>
+        <button onclick="sendLocation()">Send Location</button>
         <h3>Location Result:</h3>
         <p>Latitude: <span id="latitude"></span></p>
         <p>Longitude: <span id="longitude"></span></p>
