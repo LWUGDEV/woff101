@@ -5,136 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WOFF Sample</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
 
-div.content-section {
+        header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        div.content-section {
             background-color: #f5f5f5;
             margin: 10px 0;
             padding: 15px;
             border-radius: 8px;
-        }    
+        }
+
+        h3 {
+            color: #333;
+        }
+
         button {
-        padding: 20px 30px;       /* ボタンの内側の余白を追加 */
-        font-size: 18px;         /* フォントサイズを大きくする */
-        border-radius: 8px;      /* ボタンの角を丸くする */
-        cursor: pointer;         /* ポインタをハンド型にする */
-        background-color: #007BFF;   /* ボタンの背景色 */
-        color: white;            /* ボタンの文字色 */
-        border: none;            /* ボタンのボーダーを無くす */
-        margin-top: 10px;        /* ボタンの上側の余白を追加 */
-        margin-bottom: 10px;     /* ボタンの下側の余白を追加 */
-        transition: background-color 0.3s;  /* ホバー時の背景色の遷移を滑らかにする */
-    }
+            padding: 20px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
 
-    button:hover {
-        background-color: #0056b3;   /* ボタンにホバーしたときの背景色 */
-    }
+        button:hover {
+            background-color: #0056b3;
+        }
 
-    button:active {
-        background-color: #004085;   /* ボタンをクリックしたときの背景色 */
-    }
-    /* スキャン結果と位置情報結果の背景を白にするスタイル */
-.result {
-    background-color: #ffffff;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #f0f0f0;
-}
-</style>
+        button:active {
+            background-color: #004085;
+        }
 
-
-    <!-- WOFF SDKの追加 -->
+        .result {
+            background-color: #ffffff;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #f0f0f0;
+            color: #333;  /* 追加 */
+        }
+    </style>
     <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
-
     <script>
-        var woffid = "aqbfr51mLmVaMKkHxhqkAg"; // 変数woffidの指定
-
-        var currentLocation = null; // 現在の位置情報を保存する変数
-
-        function scanQRCode() {
-            woff.scanQR().then((result) => {
-                document.getElementById("scanResult").innerText = result.value;
-            }).catch((err) => {
-                console.log("Error scanning QR:", err);
-            });
-        }
-
-        function sendQRScanResult() {
-    var scanResult = document.getElementById('scanResult').innerText;
-    woff.sendMessage({
-        content: scanResult
-    })
-    .then(() => {
-        console.log('QR scan result sent');
-    })
-    .catch((err) => {
-        console.log('error', err);
-    });
-}
-
-        function getLocation() {
-            navigator.geolocation.getCurrentPosition((position) => {
-                currentLocation = position;
-                document.getElementById("latitude").innerText = position.coords.latitude;
-                document.getElementById("longitude").innerText = position.coords.longitude;
-            }, (err) => {
-                console.log("Error getting location:", err);
-            });
-        }
-
-        function sendLocation() {
-            if (currentLocation) {
-                const locationMessage = `Latitude: ${currentLocation.coords.latitude}, Longitude: ${currentLocation.coords.longitude}`;
-                woff.sendMessage({
-                    content: locationMessage
-                }).then(() => {
-                    console.log('message sent');
-                }).catch((err) => {
-                    console.log('error', err);
-                });
-            } else {
-                alert("Please get the location first!");
-            }
-        }
-
-        function openWOFFGuide() {
-            woff.openWindow({
-                url: "https://developers.worksmobile.com/jp/docs/woff-guide",
-                external: true
-            });
-        }
-
-        window.onload = function() {
-            function successCallback() {
-                console.log("Initialization successful.");
-
-                // woff.getProfileの実行
-                woff.getProfile().then((profile) => {
-                    document.getElementById("domainId").innerText = profile.domainId;
-                    document.getElementById("userId").innerText = profile.userId;
-                    document.getElementById("displayName").innerText = profile.displayName;
-                }).catch((err) => {
-                    console.log("Error fetching profile:", err);
-                });
-            }
-
-            function errorCallback(err) {
-                console.log("Initialization failed:", err);
-            }
-
-            // woff.initの実行
-            woff.init(
-                { woffId: woffid }, 
-                successCallback, 
-                errorCallback
-            );
-        }
+        // ... JavaScriptの内容 ...
     </script>
 </head>
 <body>
     <header>
         WOFF アプリのサンプル
         SDK のメソッドの動作の一部を試せます
-        
     </header>
 
     <!-- プロフィール情報を表示する領域 -->
@@ -145,28 +77,30 @@ div.content-section {
         <p>表示名: <span id="displayName"></span></p>
     </div>
 
-<!-- QRコードスキャンボタンと結果の表示領域 -->
-<div class="content-section">
-    <button onclick="scanQRCode()">QR コードスキャナーを起動</button>
-    <h3>スキャン結果:</h3>
-    <p id="scanResult" class="result"></p> <!-- class を追加 -->
-    <button onclick="sendQRScanResult()">QR スキャン結果を送信</button>
-</div>
+    <!-- QRコードスキャンボタンと結果の表示領域 -->
+    <div class="content-section">
+        <button onclick="scanQRCode()">QR コードスキャナーを起動</button>
+        <h3>スキャン結果:</h3>
+        <p id="scanResult" class="result"></p> <!-- class を追加 -->
+        <button onclick="sendQRScanResult()">QR スキャン結果を送信</button>
+    </div>
 
-<!-- 位置情報を取得するボタンと結果の表示領域 -->
-<div class="content-section">
-    <button onclick="getLocation()">位置情報を取得</button>
-    <h3>位置情報結果:</h3>
-    <p>緯度: <span id="latitude" class="result"></span></p> <!-- class を追加 -->
-    <p>経度: <span id="longitude" class="result"></span></p> <!-- class を追加 -->
-    <button onclick="sendLocation()">位置情報を送信</button>
-</div>
+    <!-- 位置情報を取得するボタンと結果の表示領域 -->
+    <div class="content-section">
+        <button onclick="getLocation()">位置情報を取得</button>
+        <h3>位置情報結果:</h3>
+        <p>緯度: <span id="latitude" class="result"></span></p> <!-- class を追加 -->
+        <p>経度: <span id="longitude" class="result"></span></p> <!-- class を追加 -->
+        <button onclick="sendLocation()">位置情報を送信</button>
+    </div>
+
     <!-- 参考情報の領域 -->
     <div class="content-section">
         <h3>参考情報</h3>
         <p>WOFF SDKに関する詳しいガイドは以下のリンクから参照できます。</p>
         <button onclick="openWOFFGuide()">WOFF ガイドを表示</button>
     </div>
-    <!-- ... (その他のコンテンツ) ... -->
+
+    <!-- ... (その他のコンテンツがある場合) ... -->
 </body>
 </html>
